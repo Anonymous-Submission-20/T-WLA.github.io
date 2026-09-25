@@ -1,0 +1,179 @@
+[
+  {
+    "id": "Paper_Baseline",
+    "task": "Paper",
+    "method": "Baseline",
+    "fps": 30,
+    "frames": 414,
+    "duration": 13.8,
+    "hasContact": true,
+    "path": "resources/robot/Paper_Baseline/",
+    "mediaVersion": "2ce07da9bc44"
+  },
+  {
+    "id": "Paper_Trex",
+    "task": "Paper",
+    "method": "Trex",
+    "fps": 30,
+    "frames": 160,
+    "duration": 5.333333333333333,
+    "hasContact": false,
+    "path": "resources/robot/Paper_Trex/",
+    "mediaVersion": "b8153e40bf10"
+  },
+  {
+    "id": "Paper_TWLA",
+    "task": "Paper",
+    "method": "TWLA",
+    "fps": 30,
+    "frames": 707,
+    "duration": 23.566666666666666,
+    "hasContact": true,
+    "path": "resources/robot/Paper_TWLA/",
+    "mediaVersion": "c3790f515772"
+  },
+  {
+    "id": "Paper_TWLA_Editor",
+    "task": "Paper",
+    "method": "TWLA_Editor",
+    "fps": 30,
+    "frames": 349,
+    "duration": 11.633333333333333,
+    "hasContact": true,
+    "path": "resources/robot/Paper_TWLA_Editor/",
+    "mediaVersion": "639ba67447ab"
+  },
+  {
+    "id": "Cup_Baseline",
+    "task": "Cup",
+    "method": "Baseline",
+    "fps": 30,
+    "frames": 428,
+    "duration": 14.266666666666667,
+    "hasContact": false,
+    "path": "resources/robot/Cup_Baseline/",
+    "mediaVersion": "7ff2dc68ffc5"
+  },
+  {
+    "id": "Cup_Trex",
+    "task": "Cup",
+    "method": "Trex",
+    "fps": 30,
+    "frames": 1206,
+    "duration": 40.2,
+    "hasContact": true,
+    "path": "resources/robot/Cup_Trex/",
+    "mediaVersion": "b7bf52df6357"
+  },
+  {
+    "id": "Cup_TWLA",
+    "task": "Cup",
+    "method": "TWLA",
+    "fps": 30,
+    "frames": 530,
+    "duration": 17.666666666666668,
+    "hasContact": false,
+    "path": "resources/robot/Cup_TWLA/",
+    "mediaVersion": "ba31acc6ada0",
+    "note": "Recorded motion replay"
+  },
+  {
+    "id": "Cup_TWLA_Editor",
+    "task": "Cup",
+    "method": "TWLA_Editor",
+    "fps": 30,
+    "frames": 600,
+    "duration": 20.0,
+    "hasContact": true,
+    "path": "resources/robot/Cup_TWLA_Editor/",
+    "mediaVersion": "116c22055df6"
+  },
+  {
+    "id": "Bag_Baseline",
+    "task": "Bag",
+    "method": "Baseline",
+    "fps": 30,
+    "frames": 547,
+    "duration": 18.233333333333334,
+    "hasContact": false,
+    "path": "resources/robot/Bag_Baseline/",
+    "mediaVersion": "551cb4ef03c3"
+  },
+  {
+    "id": "Bag_Trex",
+    "task": "Bag",
+    "method": "Trex",
+    "fps": 30,
+    "frames": 1189,
+    "duration": 39.63333333333333,
+    "hasContact": false,
+    "path": "resources/robot/Bag_Trex/",
+    "mediaVersion": "db3582479768"
+  },
+  {
+    "id": "Bag_TWLA",
+    "task": "Bag",
+    "method": "TWLA",
+    "fps": 30,
+    "frames": 705,
+    "duration": 23.5,
+    "hasContact": true,
+    "path": "resources/robot/Bag_TWLA/",
+    "mediaVersion": "202b8e9f0919"
+  },
+  {
+    "id": "Bag_TWLA_Editor2",
+    "task": "Bag",
+    "method": "TWLA_Editor",
+    "fps": 30,
+    "frames": 1011,
+    "duration": 33.7,
+    "hasContact": true,
+    "path": "resources/robot/Bag_TWLA_Editor2/",
+    "mediaVersion": "5a0eee22c565"
+  },
+  {
+    "id": "Egg_Baseline",
+    "task": "Egg",
+    "method": "Baseline",
+    "fps": 30,
+    "frames": 480,
+    "duration": 16.0,
+    "hasContact": false,
+    "path": "resources/robot/Egg_Baseline/",
+    "mediaVersion": "a51fa48537ea"
+  },
+  {
+    "id": "Egg_Trex",
+    "task": "Egg",
+    "method": "Trex",
+    "fps": 30,
+    "frames": 883,
+    "duration": 29.433333333333334,
+    "hasContact": true,
+    "path": "resources/robot/Egg_Trex/",
+    "mediaVersion": "8fc7221f7271"
+  },
+  {
+    "id": "Egg_TWLA",
+    "task": "Egg",
+    "method": "TWLA",
+    "fps": 30,
+    "frames": 480,
+    "duration": 16.0,
+    "hasContact": true,
+    "path": "resources/robot/Egg_TWLA/",
+    "mediaVersion": "c8151860fb8c"
+  },
+  {
+    "id": "Egg_TWLA_Editor",
+    "task": "Egg",
+    "method": "TWLA_Editor",
+    "fps": 30,
+    "frames": 494,
+    "duration": 16.466666666666665,
+    "hasContact": true,
+    "path": "resources/robot/Egg_TWLA_Editor/",
+    "mediaVersion": "81755bedb178"
+  }
+]

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="T-WLA: Bridging Slow Vision and Fast Touch. Shared visual memory and fresh tactile context guide fast action correction for contact-rich manipulation.">
+  <meta name="theme-color" content="#fafaf7">
+  <title>T-WLA — Bridging Slow Vision and Fast Touch</title>
+  <link rel="icon" type="image/svg+xml" href="resources/favicon.svg">
+  <link rel="stylesheet" href="resources/site.css?v=robot-order-20261016">
+  <link rel="stylesheet" href="resources/player/player.css">
+  <link rel="stylesheet" href="resources/player-theme.css?v=20261004">
+  <script type="importmap">{"imports":{"three":"./resources/vendor/three/three.module.js","three/addons/":"./resources/vendor/three/addons/"}}</script>
+  <script type="module" src="resources/player/player.js?v=paper-v4-20261016"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="wrap masthead">
+    <a class="wordmark" href="#overview" aria-label="T-WLA overview">
+      <svg class="brand-mark" viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M2 8h26M2 22h4l3-8 4 12 4-12 4 8h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="8" r="2.4" fill="currentColor"/><circle cx="22" cy="8" r="2.4" fill="currentColor"/></svg>
+      T-WLA
+    </a>
+    <nav aria-label="Page sections">
+      <a href="#abstract">Abstract</a>
+      <a href="#method">Method</a>
+      <a href="#robot">Robot demos</a>
+      <a href="#hand-pose">Hand pose</a>
+      <a href="#results">Results</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="wrap hero" id="overview" aria-labelledby="hero-title">
+      <p class="eyebrow hero-tag">Tactile World–Language–Action</p>
+      <h1 class="paper-title" id="hero-title"><span class="title-name">T-WLA</span>Bridging Slow Vision<br>and Fast Touch</h1>
+      <p class="hero-subtitle">Visual memory. <em>Tactile context.</em> Fast action correction.</p>
+      <p class="lead">A visual policy generates an action chunk and history-aware visual memory. Between RGB updates, a lightweight tactile editor uses that cached memory and recent touch to correct the remaining actions.</p>
+      <div class="resources" aria-label="Project resources">
+        <a class="resource primary" href="#robot">Explore the demos <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="facts" aria-label="Reported results and update rates">
+        <div class="fact rate-fact"><strong>39.7 <span>/</span> 119.1 <small>Hz</small></strong><span>Reported visual / tactile update rates</span></div>
+        <div class="fact"><strong>30<small>%</small></strong><span>Lower finger-joint MPJPE on EgoTouch</span></div>
+        <div class="fact"><strong>50.0<small>%</small></strong><span>Average success across four robot tasks</span></div>
+      </div>
+      <p class="hero-note">Reported in the paper. The 30% reduction is relative to the strongest reported EgoTouch baseline.</p>
+    </section>
+
+    <section class="wrap section" id="abstract" aria-labelledby="abstract-title">
+      <p class="eyebrow">Paper overview</p>
+      <h2 id="abstract-title">Abstract</h2>
+      <div class="abstract-copy">
+        <p>Contact-rich manipulation requires fast tactile corrections grounded in visual information and past observations. T-WLA connects visual action generation and tactile correction through shared <strong>visual memory</strong>. At each RGB update, the visual branch combines the current observation and task instruction with retrieved visual history, producing an updated visual memory and a base action chunk.</p>
+        <p>Between RGB updates, a lightweight editor combines cached visual memory, the original base action chunk, elapsed time, and fresh <strong>tactile context</strong> encoded from recent touch. It corrects only valid, unexecuted actions without rerunning vision. Future-image and future-pressure prediction provide training-only supervision; both prediction heads are removed at inference. We evaluate future hand-motion prediction on EgoTouch and Tachin, and closed-loop control on four real-world manipulation tasks.</p>
+      </div>
+    </section>
+
+    <section class="wrap section" id="method" aria-labelledby="method-title">
+      <p class="eyebrow">Method</p>
+      <h2 id="method-title">Slow vision. Fast touch.</h2>
+      <p class="section-lead"><strong>Visual memory</strong> retains task and scene information. <strong>Tactile context</strong> captures evolving contact. The editor uses both to revise an ongoing action chunk without rerunning vision.</p>
+      <figure class="method-figure">
+        <a href="resources/images/method-overview.png?v=paper-v4-20261016" target="_blank" rel="noopener" aria-label="Open full-resolution T-WLA pipeline figure"><img src="resources/images/method-overview.png?v=paper-v4-20261016" width="2210" height="1068" loading="lazy" decoding="async" alt="T-WLA Figure 2: learned queries retrieve visual history from a memory bank. At RGB updates, the vision–language model produces visual memory and a base action chunk. At tactile updates, encoded tactile context modulates a residual editor conditioned on the cached visual memory and base chunk; only remaining actions are corrected."></a>
+        <figcaption>Each RGB update refreshes visual memory and generates a base action chunk. Both are cached between RGB updates. Fresh tactile context drives corrections to valid, unexecuted actions, always relative to the original base chunk.</figcaption>
+      </figure>
+      <div class="mechanism-notes">
+        <article><span class="note-index">01</span><h3>Visual memory</h3><p>A memory bank stores past visual memories. Learned queries retrieve history, which the visual model combines with the current inputs. The resulting visual memory guides both action generation and tactile correction.</p></article>
+        <article><span class="note-index">02</span><h3>Tactile context</h3><p>Recent tactile history is encoded at each touch update. Through FiLM, it modulates action features conditioned on cached visual memory, the original base chunk, and elapsed time.</p></article>
+        <article><span class="note-index">03</span><h3>Training-only prediction</h3><p>Future-image and future-pressure prediction shape features for control. Future observations are supervision, never controller inputs. Both prediction heads are removed at inference.</p></article>
+      </div>
+    </section>
+
+    <section class="section robot" id="robot" aria-labelledby="robot-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div><p class="eyebrow">Real robot demonstrations</p><h2 id="robot-title">Contact-rich manipulation, in motion.</h2><p class="section-lead">Choose a task, then switch methods. RGB, tactile feedback, and recorded 3D motion share one playback timeline.</p></div>
+        </div>
+        <div class="robot-gallery" role="group" aria-label="Choose a robot demonstration">
+          <input class="task-radio" type="radio" name="robot-task" id="egg-choice" aria-controls="task-egg" checked>
+          <input class="task-radio" type="radio" name="robot-task" id="cup-choice" aria-controls="task-cup">
+          <input class="task-radio" type="radio" name="robot-task" id="bag-choice" aria-controls="task-bag">
+          <input class="task-radio" type="radio" name="robot-task" id="paper-choice" aria-controls="task-paper">
+          <div class="task-options"><label for="egg-choice">Egg Manipulation</label><label for="cup-choice">Cup Nesting</label><label for="bag-choice">Bag Manipulation</label><label for="paper-choice">Paper Manipulation</label></div>
+          <div class="robot-list" id="robot-list"></div>
+        </div>
+        <noscript><p class="evidence">Enable JavaScript for the synchronized players. Videos: <a href="resources/robot/Egg_TWLA_Editor/sync.mp4">Egg Manipulation</a> · <a href="resources/robot/Cup_TWLA_Editor/sync.mp4">Cup Nesting</a> · <a href="resources/robot/Bag_TWLA_Editor2/sync.mp4">Bag Manipulation</a> · <a href="resources/robot/Paper_TWLA_Editor/sync.mp4">Paper Manipulation</a>.</p></noscript>
+        <p class="evidence">Each demo is an individual recorded sequence with waiting periods shortened, not an aggregate success result. The 3D view replays recorded joint motion; it is not a separate simulation rollout. Nonempty recording notes are shown within the player.</p>
+      </div>
+    </section>
+
+    <section class="wrap section" id="hand-pose" aria-labelledby="pose-title">
+      <p class="eyebrow">Latest video demo · Human hand-motion prediction</p>
+      <h2 id="pose-title">Tactile-guided future hand-motion prediction.</h2>
+      <p class="section-lead">The latest demo compares T-WLA with SmolVLA + tactile on the same recorded sequence. Oblique and side views show left-hand meshes and fingertips with a shared wrist pose.</p>
+      <figure class="pose-demo">
+        <div class="video-caption"><strong>T-WLA <span>vs.</span> SmolVLA + tactile</strong><span class="video-status">RGB · Hand mesh · Fingertips</span></div>
+        <video id="hand-pose-video" controls muted playsinline preload="metadata" poster="resources/images/hand-pose-poster-mesh6.jpg" aria-label="Tactile-guided future hand-motion prediction: T-WLA and SmolVLA with tactile feedback"><source src="resources/1193_mesh6.mp4" type="video/mp4">Your browser does not support embedded video. <a href="resources/1193_mesh6.mp4">Download the hand-pose example.</a></video>
+        <figcaption>Example instruction: “Pick the pink and blue Oreo cookie box from the shelf.” Ground-truth meshes are green and predicted meshes are gray. Green circles mark ground-truth fingertips, gray crosses mark predictions, and red lines show fingertip errors. The clip plays at 0.25× speed. Wrist-local MPJPE values shown in the video describe this example, not dataset averages.</figcaption>
+      </figure>
+    </section>
+
+    <section class="wrap section" id="results" aria-labelledby="results-title">
+      <p class="eyebrow">Reported results</p>
+      <h2 id="results-title">From hand motion to real-world control.</h2>
+      <p class="section-lead">Dataset-level errors and closed-loop robot success, as reported in the paper. These results are separate from the individual video examples above.</p>
+      <div class="results-grid">
+        <article class="result-panel">
+          <h3>Future hand-motion prediction</h3>
+          <p class="panel-lead">Wrist-relative finger-joint MPJPE (cm). Lower is better.</p>
+          <div class="table-scroll"><table><thead><tr><th scope="col">Method</th><th scope="col">EgoTouch</th><th scope="col">Tachin</th></tr></thead><tbody><tr><th scope="row">VITRA + tactile</th><td>0.50</td><td>0.63</td></tr><tr><th scope="row">SmolVLA + tactile</th><td>0.50</td><td>1.28</td></tr><tr><th scope="row">MemoryVLA + tactile</th><td>1.34</td><td>1.87</td></tr><tr><th scope="row">T-Rex</th><td>1.14</td><td>1.08</td></tr><tr class="ours-row"><th scope="row">T-WLA</th><td><strong>0.35</strong></td><td><strong>0.46</strong></td></tr><tr class="reduction-row"><th scope="row">Relative reduction</th><td>30.00%</td><td>26.98%</td></tr></tbody></table></div>
+          <p class="small result-note">EgoTouch: macro-average across five environments. Tachin: complete held-out test set. Reductions are relative to the best baseline for finger-joint MPJPE on each dataset.</p>
+        </article>
+        <article class="result-panel">
+          <h3>Closed-loop manipulation</h3>
+          <p class="panel-lead">Task success (%). Higher is better.</p>
+          <div class="table-scroll"><table class="robot-results"><thead><tr><th scope="col">Controller</th><th scope="col">Egg</th><th scope="col">Sheet</th><th scope="col">Cup</th><th scope="col">Bag</th><th scope="col">Avg.</th></tr></thead><tbody><tr><th scope="row">SmolVLA</th><td>0</td><td>28</td><td>0</td><td>39</td><td>16.75</td></tr><tr><th scope="row">SmolVLA + tactile</th><td>0</td><td>30</td><td>1</td><td>37</td><td>17.00</td></tr><tr><th scope="row">T-Rex</th><td>4</td><td>3</td><td>22</td><td>63</td><td>23.00</td></tr><tr><th scope="row">T-WLA w/o tactile</th><td>18</td><td>72</td><td>17</td><td>82</td><td>47.25</td></tr><tr class="ours-row"><th scope="row">T-WLA</th><td>21</td><td>78</td><td>17</td><td>84</td><td><strong>50.00</strong></td></tr></tbody></table></div>
+          <p class="small result-note">Unweighted average over egg transfer, single-sheet pickup, paper-cup nesting, and paper-bag dragging. Robot adaptation uses 30 teleoperated demonstrations per task.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap footer"><span><strong>T-WLA</strong> · Tactile World–Language–Action</span><a href="#overview">Back to top ↑</a></footer>
+</body>
+</html>
