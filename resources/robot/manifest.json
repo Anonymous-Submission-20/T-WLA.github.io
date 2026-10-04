@@ -1,0 +1,93 @@
+[
+  {
+    "id": "Paper_Baseline",
+    "task": "Paper",
+    "method": "Baseline",
+    "fps": 30,
+    "frames": 867,
+    "duration": 28.9,
+    "hasContact": true,
+    "path": "resources/robot/Paper_Baseline/"
+  },
+  {
+    "id": "Paper_TWLA",
+    "task": "Paper",
+    "method": "TWLA",
+    "fps": 30,
+    "frames": 1619,
+    "duration": 53.96666666666667,
+    "hasContact": true,
+    "path": "resources/robot/Paper_TWLA/"
+  },
+  {
+    "id": "Paper_TWLA_Editor",
+    "task": "Paper",
+    "method": "TWLA_Editor",
+    "fps": 30,
+    "frames": 603,
+    "duration": 20.1,
+    "hasContact": true,
+    "path": "resources/robot/Paper_TWLA_Editor/"
+  },
+  {
+    "id": "Cup_Baseline",
+    "task": "Cup",
+    "method": "Baseline",
+    "fps": 30,
+    "frames": 1089,
+    "duration": 36.3,
+    "hasContact": false,
+    "path": "resources/robot/Cup_Baseline/"
+  },
+  {
+    "id": "Cup_TWLA",
+    "task": "Cup",
+    "method": "TWLA",
+    "fps": 30,
+    "frames": 863,
+    "duration": 28.766666666666666,
+    "hasContact": false,
+    "path": "resources/robot/Cup_TWLA/",
+    "note": "Recorded motion replay"
+  },
+  {
+    "id": "Cup_TWLA_Editor",
+    "task": "Cup",
+    "method": "TWLA_Editor",
+    "fps": 30,
+    "frames": 961,
+    "duration": 32.03333333333333,
+    "hasContact": true,
+    "path": "resources/robot/Cup_TWLA_Editor/"
+  },
+  {
+    "id": "Bag_Baseline",
+    "task": "Bag",
+    "method": "Baseline",
+    "fps": 30,
+    "frames": 1025,
+    "duration": 34.166666666666664,
+    "hasContact": true,
+    "path": "resources/robot/Bag_Baseline/"
+  },
+  {
+    "id": "Bag_TWLA",
+    "task": "Bag",
+    "method": "TWLA",
+    "fps": 30,
+    "frames": 1599,
+    "duration": 53.3,
+    "hasContact": true,
+    "path": "resources/robot/Bag_TWLA/"
+  },
+  {
+    "id": "Bag_TWLA_Editor",
+    "task": "Bag",
+    "method": "TWLA_Editor",
+    "fps": 30,
+    "frames": 2070,
+    "duration": 69.0,
+    "hasContact": true,
+    "path": "resources/robot/Bag_TWLA_Editor/"
+  }
+]

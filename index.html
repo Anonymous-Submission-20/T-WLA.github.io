@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="TouchTalk results and comparisons: paired robot tasks, aligned hand-motion predictions, and an upcoming pipeline video.">
+  <meta name="description" content="TouchTalk results: nine real-world robot recordings with synchronized RGB, tactile sensing, and interactive 3D motion.">
   <title>TouchTalk — Results & Comparisons</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23162130'/%3E%3Cpath d='M8 12h13v5h-4v13h-5V17H8z' fill='%236793ff'/%3E%3Cpath d='M21 10h12v5h-4v13h-5V15h-3z' fill='%23f49b64'/%3E%3C/svg%3E">
   <style>
@@ -19,18 +19,21 @@
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
     @media print{.topbar{position:static}nav,.image-link,.segmented{display:none}.section{padding-block:24px}.wrap{width:100%}.benchmarks{background:#fff;color:#162130}.benchmarks p,.benchmarks .evidence{color:#555}.chart{break-inside:avoid}.poster{print-color-adjust:exact}.robot-case{break-inside:avoid}}
   </style>
+  <link rel="stylesheet" href="resources/player/player.css">
+  <script type="importmap">{"imports":{"three":"./resources/vendor/three/three.module.js","three/addons/":"./resources/vendor/three/addons/"}}</script>
+  <script type="module" src="resources/player/player.js?v=seek-v2"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="topbar"><div class="wrap"><a class="brand" href="#top" aria-label="TouchTalk home"><span class="mark" aria-hidden="true"><i></i><i></i></span>TouchTalk</a><nav aria-label="Page navigation"><a href="#robot">Robot comparisons</a><a href="#prediction">Prediction</a><a href="#pipeline">Pipeline video</a></nav></div></header>
   <main id="main">
-    <section class="intro" id="top"><div class="wrap intro-row"><div><span class="eyebrow">TouchTalk · Results & comparisons</span><h1>Compare the action.<br>See the role of <em>touch.</em></h1><p>Paired robot tasks and aligned hand-motion predictions. Explore the comparisons, with a pipeline walkthrough to come.</p></div><a class="intro-link" href="#robot">Explore the comparisons ↗</a></div></section>
+    <section class="intro" id="top"><div class="wrap intro-row"><div><span class="eyebrow">TouchTalk · Results & comparisons</span><h1>Compare the action.<br>See the role of <em>touch.</em></h1><p>Explore real-world robot recordings through synchronized video, touch, and 3D motion, alongside hand-motion prediction comparisons.</p></div><a class="intro-link" href="#robot">Explore the comparisons ↗</a></div></section>
     <section class="section robot" id="robot"><div class="wrap">
-      <div class="section-head"><div><span class="eyebrow">01 / Closed-loop robot tasks</span><h2>Same task. With and without touch.</h2></div><p>Compare the tactile pathway under matched visual backbones, demonstrations, training budgets, and action limits.</p></div>
-      <div class="visual-key"><span><i></i>Without tactile</span><span><i></i>TouchTalk · With tactile</span><span class="badge pending">Trial videos and success rates pending</span></div>
+      <div class="section-head"><div><span class="eyebrow">01 / Real-world robot recordings</span><h2>Three tasks. Three methods.</h2></div><p>Explore nine recordings with synchronized RGB, fingertip touch maps, and interactive robot motion. Switch methods within each task, then drag the timeline to inspect contact.</p></div>
+      <div class="visual-key"><span>RGB · Tactile · Interactive 3D</span><span class="badge">3 tasks · 9 recordings</span><span>One timeline for all three views</span></div>
       <div class="robot-list" id="robot-list"></div>
-      <noscript><p>Enable JavaScript to view the four paired task cards and prediction comparisons.</p></noscript>
-      <p class="evidence">The paired panels are <b>media placeholders, not paired experimental trials</b>. AI concept artwork is reused on both sides and does not represent the actual hardware. A selected video will be kept separate from the aggregate success rate.</p>
+      <noscript><p>Enable JavaScript to view the synchronized robot recordings and prediction comparisons.</p></noscript>
+      <p class="evidence">Each player shows one recorded sequence. Tactile curves sum all fingertip sensor readings; the 3D view reconstructs recorded joint motion. These examples do not report aggregate task success rates.</p>
     </div></section>
     <section class="section prediction" id="prediction"><div class="wrap">
       <div class="section-head"><div><span class="eyebrow">02 / Hand-motion prediction</span><h2>One timestamp. Three views.</h2></div><p>Compare ground truth, a tactile-adapted baseline, and TouchTalk with the same input window, prediction horizon, and camera view.</p></div>
@@ -45,29 +48,10 @@
       <figure class="pipeline-placeholder"><figcaption><strong>Pipeline video</strong><span>Coming soon</span><small>Reserved for the pipeline walkthrough.</small></figcaption></figure>
     </div></section>
   </main>
-  <footer class="footer"><div class="wrap"><b>TouchTalk</b><span class="small">Research comparison preview · Media placeholders and pending experiments are clearly labeled.</span><a href="#top">Back to top ↑</a></div></footer>
+  <footer class="footer"><div class="wrap"><b>TouchTalk</b><span class="small">Research comparison preview · Real-world recordings and hand-motion prediction.</span><a href="#top">Back to top ↑</a></div></footer>
   <dialog id="figure-dialog" aria-labelledby="dialog-title"><div class="dialog-head"><h2 id="dialog-title">Figure</h2><button type="button" id="close-dialog">Close ×</button></div><div class="dialog-body"><img id="dialog-image" alt=""></div></dialog>
   <script>
     (() => {
-      const tasks=[
-        {id:'egg',title:'Egg transfer',tag:'Fragile contact',criterion:'The egg reaches the marked goal intact.',observe:'Contact onset, load changes, and the action residual.'},
-        {id:'sheet',title:'Single-sheet pickup',tag:'Layer separation',criterion:'Exactly one sheet is held above the verification plane.',observe:'Layer ambiguity, separation, and any regrasp.'},
-        {id:'cup',title:'Cup nesting',tag:'Compliant insertion',criterion:'The cup reaches the marked nesting depth without permanent damage.',observe:'Rim contact, alignment corrections, and final depth.'},
-        {id:'bag',title:'Bag opening',tag:'Deformation and slip',criterion:'The opening exceeds the marked threshold for the verification interval.',observe:'Bilateral contact, slip, and sustained opening.'}
-      ];
-      const robotList=document.getElementById('robot-list');
-      tasks.forEach((task,index)=>{
-        const card=document.createElement('article');card.className='robot-case';card.id='task-'+task.id;card.style.setProperty('--scene','var(--'+task.id+')');
-        card.innerHTML='<div class="case-head"><div class="case-heading"><span class="case-index">0'+(index+1)+'</span><div><h3>'+task.title+'</h3><p>'+task.tag+'</p></div></div><span class="badge pending">Evaluation pending</span></div>';
-        const pair=document.createElement('div');pair.className='pair';
-        [false,true].forEach(ours=>{
-          const side=document.createElement('figure');side.className='comparison-side'+(ours?' ours':'');
-          const label=ours?'TouchTalk · With tactile':'Without tactile';
-          side.innerHTML='<figcaption class="side-head"><strong>'+label+'</strong><span>'+(ours?'Tactile pathway enabled':'Matched visual backbone')+'</span></figcaption><div class="poster" role="img" aria-label="'+task.title+' concept artwork. '+label+' video pending; not experimental evidence."><span class="poster-note">AI concept · Placeholder</span><span class="poster-center" aria-hidden="true">▶</span><span class="poster-bottom">Video pending · No footage attached</span></div><div class="score"><span>Task success rate</span><strong>— Pending</strong></div>';
-          pair.append(side);
-        });card.append(pair);
-        const footer=document.createElement('div');footer.className='case-footer';footer.innerHTML='<p><strong>Outcome criterion</strong><br>'+task.criterion+'</p><p><strong>Compare</strong><br>'+task.observe+'<br><span class="case-evidence">Same illustrative artwork on both sides; no trial outcomes shown.</span></p>';card.append(footer);robotList.append(card);
-      });
       document.querySelectorAll('[data-pose-dataset]').forEach(button=>button.addEventListener('click',()=>{
         document.querySelectorAll('[data-pose-dataset]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
         document.querySelectorAll('.pose-dataset').forEach(e=>e.textContent=button.dataset.poseDataset+' · No sequence loaded');
