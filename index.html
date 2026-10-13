@@ -88,13 +88,13 @@
     </section>
 
     <section class="wrap section" id="hand-pose" aria-labelledby="pose-title">
-      <p class="eyebrow">Human hand-motion prediction</p>
+      <p class="eyebrow">Latest video demo · Human hand-motion prediction</p>
       <h2 id="pose-title">Tactile-guided hand pose estimation.</h2>
-      <p class="section-lead">A real example compares T-WLA with SmolVLA + tactile. Shared-wrist mesh and fingertip views reveal differences in predicted finger articulation.</p>
+      <p class="section-lead">The latest demo compares T-WLA with SmolVLA + tactile on the same recorded sequence. Oblique and side views show left-hand meshes and fingertips with a shared wrist pose.</p>
       <figure class="pose-demo">
         <div class="video-caption"><strong>T-WLA <span>vs.</span> SmolVLA + tactile</strong><span class="video-status">RGB · Hand mesh · Fingertips</span></div>
-        <video id="hand-pose-video" controls muted playsinline preload="metadata" poster="resources/images/hand-pose-poster.jpg" aria-label="Tactile-guided hand pose estimation: T-WLA and SmolVLA with tactile feedback"><source src="resources/videos/1193_Mesh.mp4" type="video/mp4">Your browser does not support embedded video. <a href="resources/videos/1193_Mesh.mp4">Download the hand-pose example.</a></video>
-        <figcaption>Example instruction: “Pick the pink and blue Oreo cookie box from the shelf.” Ground-truth fingertips are green circles; predictions are orange crosses. Errors displayed in the video are example-level measurements, not dataset averages.</figcaption>
+        <video id="hand-pose-video" controls muted playsinline preload="metadata" poster="resources/images/hand-pose-poster-mesh6.jpg" aria-label="Tactile-guided hand pose estimation: T-WLA and SmolVLA with tactile feedback"><source src="resources/1193_mesh6.mp4" type="video/mp4">Your browser does not support embedded video. <a href="resources/1193_mesh6.mp4">Download the hand-pose example.</a></video>
+        <figcaption>Example instruction: “Pick the pink and blue Oreo cookie box from the shelf.” Ground-truth meshes are green and predicted meshes are gray. Green circles mark ground-truth fingertips, gray crosses mark predictions, and red lines show fingertip errors. The clip plays at 0.25× speed. Wrist-local MPJPE values shown in the video describe this example, not dataset averages.</figcaption>
       </figure>
     </section>
 
