@@ -22,12 +22,16 @@ test('the paper overview image is served as a genuine PNG', async () => {
   assert.ok(bytes.readUInt32BE(16) >= 1800, 'Method labels need a high-resolution image');
 });
 
-test('all nine existing robot recordings and matching 3D assets remain reachable', async () => {
+test('all sixteen robot recordings and matching 3D assets remain reachable', async () => {
   const response = await fetch(new URL('resources/robot/manifest.json', base));
   assert.equal(response.status, 200);
   const clips = await response.json();
-  assert.equal(clips.length, 9);
-  assert.deepEqual([...new Set(clips.map(clip => clip.task))].sort(), ['Bag', 'Cup', 'Paper']);
+  assert.equal(clips.length, 16);
+  assert.deepEqual([...new Set(clips.map(clip => clip.task))].sort(), ['Bag', 'Cup', 'Egg', 'Paper']);
+  for (const task of ['Bag', 'Cup', 'Egg', 'Paper']) {
+    assert.deepEqual(clips.filter(clip => clip.task === task).map(clip => clip.method).sort(),
+      ['Baseline', 'TWLA', 'TWLA_Editor', 'Trex'].sort());
+  }
   for (const clip of clips) {
     for (const resource of ['sync.mp4', 'sync_poster.jpg', 'robot.glb']) {
       const media = await fetch(new URL(clip.path + resource, base), { method: 'HEAD' });

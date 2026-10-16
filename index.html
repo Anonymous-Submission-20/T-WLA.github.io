@@ -7,11 +7,11 @@
   <meta name="theme-color" content="#fafaf7">
   <title>t_wla — Bridging Slow Vision and Fast Touch</title>
   <link rel="icon" type="image/svg+xml" href="resources/favicon.svg">
-  <link rel="stylesheet" href="resources/site.css?v=20261004">
+  <link rel="stylesheet" href="resources/site.css?v=fast-upstream-20261013">
   <link rel="stylesheet" href="resources/player/player.css">
   <link rel="stylesheet" href="resources/player-theme.css?v=20261004">
   <script type="importmap">{"imports":{"three":"./resources/vendor/three/three.module.js","three/addons/":"./resources/vendor/three/addons/"}}</script>
-  <script type="module" src="resources/player/player.js?v=seek-v2"></script>
+  <script type="module" src="resources/player/player.js?v=trex-20261015"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -79,22 +79,23 @@
           <input class="task-radio" type="radio" name="robot-task" id="paper-choice" aria-controls="task-paper" checked>
           <input class="task-radio" type="radio" name="robot-task" id="cup-choice" aria-controls="task-cup">
           <input class="task-radio" type="radio" name="robot-task" id="bag-choice" aria-controls="task-bag">
-          <div class="task-options"><label for="paper-choice">Paper manipulation</label><label for="cup-choice">Cup nesting</label><label for="bag-choice">Bag manipulation</label></div>
+          <input class="task-radio" type="radio" name="robot-task" id="egg-choice" aria-controls="task-egg">
+          <div class="task-options"><label for="paper-choice">Paper manipulation</label><label for="cup-choice">Cup nesting</label><label for="bag-choice">Bag manipulation</label><label for="egg-choice">Egg manipulation</label></div>
           <div class="robot-list" id="robot-list"></div>
         </div>
-        <noscript><p class="evidence">Enable JavaScript for the synchronized players. Videos: <a href="resources/robot/Paper_TWLA_Editor/sync.mp4">Paper manipulation</a> · <a href="resources/robot/Cup_TWLA_Editor/sync.mp4">Cup nesting</a> · <a href="resources/robot/Bag_TWLA_Editor/sync.mp4">Bag manipulation</a>.</p></noscript>
-        <p class="evidence">Each demo is an individual recorded sequence, not an aggregate success result. The 3D view replays recorded joint motion; it is not a separate simulation rollout. Nonempty recording notes are shown within the player.</p>
+        <noscript><p class="evidence">Enable JavaScript for the synchronized players. Videos: <a href="resources/robot/Paper_TWLA_Editor/sync.mp4">Paper manipulation</a> · <a href="resources/robot/Cup_TWLA_Editor/sync.mp4">Cup nesting</a> · <a href="resources/robot/Bag_TWLA_Editor2/sync.mp4">Bag manipulation</a> · <a href="resources/robot/Egg_TWLA_Editor/sync.mp4">Egg manipulation</a>.</p></noscript>
+        <p class="evidence">Each demo is an individual recorded sequence with waiting periods shortened, not an aggregate success result. The 3D view replays recorded joint motion; it is not a separate simulation rollout. Nonempty recording notes are shown within the player.</p>
       </div>
     </section>
 
     <section class="wrap section" id="hand-pose" aria-labelledby="pose-title">
-      <p class="eyebrow">Latest video demo · Human hand-motion prediction</p>
+      <p class="eyebrow">Human hand-motion prediction</p>
       <h2 id="pose-title">Tactile-guided hand pose estimation.</h2>
-      <p class="section-lead">The latest demo compares T-WLA with SmolVLA + tactile on the same recorded sequence. Oblique and side views show left-hand meshes and fingertips with a shared wrist pose.</p>
+      <p class="section-lead">A real example compares T-WLA with SmolVLA + tactile. Shared-wrist mesh and fingertip views reveal differences in predicted finger articulation.</p>
       <figure class="pose-demo">
         <div class="video-caption"><strong>T-WLA <span>vs.</span> SmolVLA + tactile</strong><span class="video-status">RGB · Hand mesh · Fingertips</span></div>
-        <video id="hand-pose-video" controls muted playsinline preload="metadata" poster="resources/images/hand-pose-poster-mesh6.jpg" aria-label="Tactile-guided hand pose estimation: T-WLA and SmolVLA with tactile feedback"><source src="resources/1193_mesh6.mp4" type="video/mp4">Your browser does not support embedded video. <a href="resources/1193_mesh6.mp4">Download the hand-pose example.</a></video>
-        <figcaption>Example instruction: “Pick the pink and blue Oreo cookie box from the shelf.” Ground-truth meshes are green and predicted meshes are gray. Green circles mark ground-truth fingertips, gray crosses mark predictions, and red lines show fingertip errors. The clip plays at 0.25× speed. Wrist-local MPJPE values shown in the video describe this example, not dataset averages.</figcaption>
+        <video id="hand-pose-video" controls muted playsinline preload="metadata" poster="resources/images/hand-pose-poster.jpg" aria-label="Tactile-guided hand pose estimation: T-WLA and SmolVLA with tactile feedback"><source src="resources/videos/1193_Mesh.mp4" type="video/mp4">Your browser does not support embedded video. <a href="resources/videos/1193_Mesh.mp4">Download the hand-pose example.</a></video>
+        <figcaption>Example instruction: “Pick the pink and blue Oreo cookie box from the shelf.” Ground-truth fingertips are green circles; predictions are orange crosses. Errors displayed in the video are example-level measurements, not dataset averages.</figcaption>
       </figure>
     </section>
 

@@ -90,14 +90,17 @@ figcaption { color: var(--muted); font-size: 13px; line-height: 1.65; }
 .task-options label:hover { border-color: var(--teal); color: var(--teal); }
 #paper-choice:checked ~ .task-options [for="paper-choice"],
 #cup-choice:checked ~ .task-options [for="cup-choice"],
-#bag-choice:checked ~ .task-options [for="bag-choice"] { border-color: var(--teal); background: var(--teal); color: white; }
+#bag-choice:checked ~ .task-options [for="bag-choice"],
+#egg-choice:checked ~ .task-options [for="egg-choice"] { border-color: var(--teal); background: var(--teal); color: white; }
 #paper-choice:focus-visible ~ .task-options [for="paper-choice"],
 #cup-choice:focus-visible ~ .task-options [for="cup-choice"],
-#bag-choice:focus-visible ~ .task-options [for="bag-choice"] { outline: 3px solid var(--teal); outline-offset: 4px; }
+#bag-choice:focus-visible ~ .task-options [for="bag-choice"],
+#egg-choice:focus-visible ~ .task-options [for="egg-choice"] { outline: 3px solid var(--teal); outline-offset: 4px; }
 .robot-gallery #robot-list > .robot-case { display: none; }
 #paper-choice:checked ~ #robot-list > #task-paper,
 #cup-choice:checked ~ #robot-list > #task-cup,
-#bag-choice:checked ~ #robot-list > #task-bag { display: block; }
+#bag-choice:checked ~ #robot-list > #task-bag,
+#egg-choice:checked ~ #robot-list > #task-egg { display: block; }
 .evidence { max-width: 990px; margin: 18px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
 .evidence a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
 .pose-demo { margin: 26px 0 0; padding: 23px 26px 18px; border: 1px solid var(--line); border-radius: 7px; background: var(--white); }
