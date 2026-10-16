@@ -202,9 +202,8 @@ export class RobotPlayer {
     this.pendingSeek=null;this.seekInFlight=false;this.resumeWhenSettled=false;
     this.note.classList.remove('player-error');
     this.note.textContent=[clip.note, !clip.hasContact ? 'Recorded tactile values are zero throughout this clip.' : ''].filter(Boolean).join(' · ');
-    const version=encodeURIComponent(clip.mediaVersion || 'seek-v2');
-    this.rgb.poster=clip.path+'sync_poster.jpg?v='+version;
-    this.rgb.src=clip.path+'sync.mp4?v='+version;
+    this.rgb.poster=clip.path+'sync_poster.jpg';
+    this.rgb.src=clip.path+'sync.mp4?v=seek-v2';
     this.rgb.load();
     this.rgb.playbackRate=this.rate;
     this.updateTransport(0);
@@ -216,7 +215,7 @@ export class RobotPlayer {
       this.model=null; this.mixer=null;
     }
     try {
-      const gltf=await new GLTFLoader().loadAsync(clip.path+'robot.glb?v='+version);
+      const gltf=await new GLTFLoader().loadAsync(clip.path+'robot.glb');
       if (generation!==this.generation) {this.disposeModel(gltf.scene);return;}
       this.model=gltf.scene;this.scene.add(this.model);
       this.mixer=new THREE.AnimationMixer(this.model);
@@ -258,18 +257,16 @@ export class RobotPlayer {
 async function init() {
   const container=document.getElementById('robot-list');
   if (!container) return;
-  const response=await fetch(new URL('../robot/manifest.json',import.meta.url),{cache:'no-cache'});
+  const response=await fetch(new URL('../robot/manifest.json',import.meta.url));
   if (!response.ok) throw new Error('Could not load clip manifest');
   const clips=await response.json();
   const tasks=[{id:'Paper',title:'Paper manipulation',description:'Observe the contact pattern as the hand handles a sheet of paper.'},
     {id:'Cup',title:'Cup nesting',description:'Follow the grasp, transfer, and placement of a paper cup.'},
-    {id:'Bag',title:'Bag manipulation',description:'Explore fingertip contact during deformable-object manipulation.'},
-    {id:'Egg',title:'Egg manipulation',description:'Observe fingertip contact while handling an egg.'}].filter(task=>clips.some(clip=>clip.task===task.id));
-  const methods=[['Baseline','SmolVLA'],['Trex','T-Rex'],['TWLA','T-WLA'],['TWLA_Editor','T-WLA + Editor']];
+    {id:'Bag',title:'Bag manipulation',description:'Explore fingertip contact during deformable-object manipulation.'}];
+  const methods=[['Baseline','Baseline'],['TWLA','T-WLA'],['TWLA_Editor','T-WLA + Editor']];
   tasks.forEach((task,index) => {
-    const taskMethods=methods.filter(([id])=>clips.some(clip=>clip.task===task.id && clip.method===id));
     const card=document.createElement('article');card.className='robot-case';card.id='task-'+task.id.toLowerCase();
-    card.innerHTML=`<div class="case-head"><div class="case-heading"><span class="case-index">0${index+1}</span><div><h3>${task.title}</h3><p>${task.description}</p></div></div><div class="method-tabs" role="group" aria-label="${task.title} method">${taskMethods.map(([id,label])=>`<button data-method="${id}" aria-pressed="${id==='TWLA_Editor'}">${label}</button>`).join('')}</div></div><div class="robot-player" aria-label="${task.title} synchronized player"></div>`;
+    card.innerHTML=`<div class="case-head"><div class="case-heading"><span class="case-index">0${index+1}</span><div><h3>${task.title}</h3><p>${task.description}</p></div></div><div class="method-tabs" role="group" aria-label="${task.title} method">${methods.map(([id,label])=>`<button data-method="${id}" aria-pressed="${id==='TWLA_Editor'}">${label}</button>`).join('')}</div></div><div class="robot-player" aria-label="${task.title} synchronized player"></div>`;
     container.append(card);
     let player=null,method='TWLA_Editor';
     const activate=() => {
